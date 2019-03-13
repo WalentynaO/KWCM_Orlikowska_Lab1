@@ -12,3 +12,14 @@ configure_file (
 "${PROJECT_BINARY_DIR}/LaborkaConfig.h"
 )
 include_directories("${PROJECT_BINARY_DIR}")
+option (BUILD_TESTS "Czy budować testy" ON)
+if (BUILD_TESTS)
+enable_testing()
+add_test (LaborkaPodstawowyTest Laborka)
+add_test (LaborkaWynikSin30 Laborka 30)
+set_tests_properties (LaborkaWynikSin30
+PROPERTIES PASS_REGULAR_EXPRESSION "0[.,]5")
+add_test (Laborka3sek Laborka)
+set_tests_properties (Laborka3sek
+PROPERTIES TIMEOUT 3)
+endif (BUILD_TESTS)
